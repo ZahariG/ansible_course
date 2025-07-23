@@ -1,4 +1,7 @@
+[web_servers]
 # Ubuntu Server
-192.168.140.102 apache_package=apache2 php_package=libapache2-mod-php
+192.168.140.102
+
+[db_servers]
 # Fedora Server
-192.168.140.101 apache_package=httpd php_package=php
+192.168.140.101
