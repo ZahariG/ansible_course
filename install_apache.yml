@@ -1,12 +1,26 @@
 ---
-- hosts: all
+- hosts: web_servers
   become: true
   tasks:
 
-    - name: update repository index & install apache & php (Ubuntu + Fedora)
-      ansible.builtin.package:
-        name:
-          - "{{ apache_package }}"
-          - "{{ php_package }}"
-        state: latest
-        update_cache: yes
+  - name: install all on Ubuntu
+    ansible.builtin.package:
+      name:
+        - "{{ apache_package  }}"
+        - "{{ php_package }}"
+      state: latest
+      update_cache: yes
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install all on Fedora
+    ansible.builtin.dnf:
+      name:
+        - httpd
+        - php
+      state: latest
+      update_cache: yes
+      use_backend: dnf4
+
