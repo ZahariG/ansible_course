@@ -1,0 +1,20 @@
+- name: create user
+  tags: always
+  ansible.builtin.user:
+    name: gigi
+    groups: root
+
+- name: add sudoers file for gigi
+  tags: always
+  ansible.builtin.copy:
+    src: sudoer_gigi
+    dest: /etc/sudoers.d/gigi
+    owner: root
+    group: root
+    mode: 0440
+
+- name: ad ssh key for gigi user
+  tags: always
+  ansible.builtin.authorized_key:
+    user: gigi
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDuCijVxu8D8gL9eS5cY59xXHN5cmFEOg/cDwDyxagvk george@ubuntuws"
